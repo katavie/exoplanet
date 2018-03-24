@@ -1,15 +1,16 @@
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 ); // field of view (extent of scene on display at given moment, value in degrees); aspect ratio (almost always width/height); near and far clipping plane
+var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
 
 var canvas = document.querySelector('#myCanvas');
-var renderer = new THREE.WebGLRenderer({ canvas: canvas });
+var renderer = new THREE.WebGLRenderer({canvas: canvas});
 renderer.setSize( canvas.offsetWidth, canvas.offsetHeight );
 
-document.querySelector('section').appendChild( renderer.domElement );
+document.querySelector('section').appendChild(renderer.domElement);
 
 // group to hold sphere and texture meshed together
-const globe = new THREE.Group();
-scene.add(globe);
+var bigGroup = new THREE.Group();
+var globe = new THREE.Group();
+bigGroup.add(globe);
 
 var sphere, material, mesh;
 
@@ -28,7 +29,14 @@ loader.load('https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57735/land
     // add mesh to globe
     globe.add(mesh);
 });
+globe.position.set(0,2,-1);
 
+var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+var cube = new THREE.Mesh( geometry, material );
+//cube.position.set(200,0,0);
+bigGroup.add( cube ); // (0,0,0) coordinates, causing camera and cube to be inside each other
+scene.add(bigGroup);
 
 camera.position.z = 5;
 
@@ -40,6 +48,9 @@ function animate() {
     // rotation animation
     globe.rotation.x += 0.001;
     globe.rotation.y += 0.0025;
+
+    cube.rotation.x += -0.001;
+    cube.rotation.y += 0.0025;
     
     renderer.render( scene, camera );
 }
