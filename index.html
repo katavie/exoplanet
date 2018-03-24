@@ -34,35 +34,6 @@
 			<p class="small">Made by Katherine Huang at MetroHacks Women 2018</p>
 		</footer>
 
-		<script>
-			var scene = new THREE.Scene();
-			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 ); // field of view (extent of scene on display at given moment, value in degrees); aspect ratio (almost always width/height); near and far clipping plane
-
-			var canvas = document.querySelector('#myCanvas');
-			var renderer = new THREE.WebGLRenderer({ canvas: canvas });
-			renderer.setSize( canvas.offsetWidth, canvas.offsetHeight );
-
-			document.querySelector('section').appendChild( renderer.domElement );
-
-			var geometry = new THREE.BoxGeometry( 1, 1, 1 ); // contains points (vertices) and fill (faces)
-			var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-			var cube = new THREE.Mesh( geometry, material ); // takes a geometry and applies a material to it
-			scene.add( cube ); // (0,0,0) coordinates, causing camera and cube to be inside each other
-
-			camera.position.z = 5;
-
-			// redraw every time the screen is refreshed (60 times/s)
-			// pauses when user navigates to diff tab
-			function animate() {
-				requestAnimationFrame( animate );
-
-				// rotation animation
-				cube.rotation.x += 0.1;
-				cube.rotation.y += 0.1;
-				
-				renderer.render( scene, camera );
-			}
-			animate();
-		</script>
+		<script src="js/script.js"></script>
 	</body>
 </html>
