@@ -29,11 +29,13 @@ loader.load('https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57735/land
     // add mesh to globe
     globe.add(mesh);
 });
-globe.position.set(0,2,-1);
+//globe.position.set(0,2,-1);
 
 var geometry = new THREE.BoxGeometry( 1, 1, 1 );
 var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 var cube = new THREE.Mesh( geometry, material );
+cube.transparent = true;
+cube.opacity = 1;
 //cube.position.set(200,0,0);
 bigGroup.add( cube ); // (0,0,0) coordinates, causing camera and cube to be inside each other
 scene.add(bigGroup);
@@ -58,7 +60,7 @@ animate();
 
 var toggleButton = document.getElementById('myButton');
 
-toggleButton.addEventListener('click', changeBg);
+toggleButton.addEventListener('click', changeOpacity);
 
 var imageURL = 'https://images.unsplash.com/photo-1492553397175-5f7ec0158903?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f13108c72f87cf399a55260c6596694a&auto=format&fit=crop&w=1050'
 
@@ -73,4 +75,11 @@ function changeBg() {
         // add mesh to globe
         globe.add(mesh);
     });
+}
+
+var objects = [globe.children[0], cube]
+
+function changeOpacity(){
+    globe.children[0].material.transparent = true;
+    globe.children[0].material.opacity = 0.5;
 }
