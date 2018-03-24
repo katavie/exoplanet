@@ -11,19 +11,22 @@ document.querySelector('section').appendChild( renderer.domElement );
 const globe = new THREE.Group();
 scene.add(globe);
 
+var sphere, material, mesh;
+
 var loader = new THREE.TextureLoader();
 loader.load('https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57735/land_ocean_ice_cloud_2048.jpg', function(texture) {
-        // create sphere
-        var sphere = new THREE.SphereGeometry(2, 32, 32); // radius, segments, rings
+    // create sphere
+    sphere = new THREE.SphereGeometry(2, 32, 32); // radius, segments, rings
 
-        // map texture to material
-        var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
+    // map texture to material
+    material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
+    material.needsUpdate = true;
 
-        // create new mesh w/ sphere geom
-        var mesh = new THREE.Mesh(sphere, material);
+    // create new mesh w/ sphere geom
+    mesh = new THREE.Mesh(sphere, material);
 
-        // add mesh to globe
-        globe.add(mesh);
+    // add mesh to globe
+    globe.add(mesh);
 });
 
 
@@ -41,3 +44,22 @@ function animate() {
     renderer.render( scene, camera );
 }
 animate();
+
+var toggleButton = document.getElementById('myButton');
+
+toggleButton.addEventListener('click', changeBg);
+
+var imageURL = 'https://images.unsplash.com/photo-1492553397175-5f7ec0158903?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f13108c72f87cf399a55260c6596694a&auto=format&fit=crop&w=1050'
+
+function changeBg() {
+    loader.load(imageURL, function(texture) {
+        // map texture to material
+        material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
+
+        // create new mesh w/ sphere geom
+        mesh = new THREE.Mesh(sphere, material);
+
+        // add mesh to globe
+        globe.add(mesh);
+    });
+}
