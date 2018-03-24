@@ -6,7 +6,8 @@
 
 		<title>planetsee</title>
 		
-		<link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Comfortaa:300,700" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
 		<link href="css/uikit.min.css" rel="stylesheet">
 		<link href="css/styles.css" rel="stylesheet">
 
@@ -28,13 +29,39 @@
    background-repeat: no-repeat;
    color: #555;
    margin-bottom: 1rem;
-   font-size: inherit;
+   font-size: 1.735rem;
+   font-family: Source Sans Pro;
    overflow: hidden;
-   padding: 5px 10px;
+   padding: 5px 22.5px 5px 15px;
    text-overflow: ellipsis;
    white-space: nowrap;
    width: 150px;
+   vertical-align: top;
 }
+
+		h1 {
+			font-weight: 300;
+			font-family: Comfortaa;
+			padding: 1.5rem 0;
+		}
+		h1 b {
+			font-weight: 700;
+		}
+
+		p.small {
+			font-size: 1.25rem;
+		}
+		
+		select {
+			margin-left: 7rem;
+		}
+
+		.uk-button {
+			font-size: 1.375rem;
+			padding: 0.25rem 1.5rem;
+			vertical-align: top;
+			margin-left: 1.5rem;
+		}
 		</style>
 	</head>
 
@@ -43,7 +70,7 @@
 		<script src="js/js-search.min.js"></script>
 
 		<header>
-			<h1 class="uk-heading-primary"><b>planet</b>see</h1>
+			<h1 class="uk-heading-hero"><b>planet</b>see</h1>
 
 			<select name="planet" id="planets">
 				<option value="mercury">Mercury</option>
@@ -54,8 +81,8 @@
 				<option value="saturn">Saturn</option>
 				<option value="uranus">Uranus</option>
 				<option value="neptune">Neptune</option>
-			</select><br>
-			<button id="myButton" class="uk-button uk-button-primary">Test</button>
+			</select>
+			<button id="myButton" class="uk-button uk-button-primary">View next layer</button>
 		</header>
 
 		<section>

@@ -15,6 +15,7 @@ var marsLayers = [ '5,darkblue', '5,lightblue', '1,yellow', '2,orange' ];
 
 // set up render
 var scene = new THREE.Scene();
+scene.background = new THREE.Color( 0x334ca5 );
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
 
 var canvas = document.querySelector('#myCanvas');
@@ -34,12 +35,12 @@ var imageURLs = ['img/mercury.png', 'https://eoimages.gsfc.nasa.gov/images/image
 for (var i = 0; i < earthLayers.length; i++) {
 	loader.load(imageURLs[i], function(texture){
 		layer = new THREE.Group();
-		sphere = new THREE.SphereGeometry(i+1, 30, 30);
+		sphere = new THREE.SphereGeometry(2.5, 30, 30);
 		material = new THREE.MeshBasicMaterial({map: texture, overdraw: 0.5});
 		mesh = new THREE.Mesh(sphere, material);
 		mesh.material.transparent = true;
 		layer.add(mesh);
-		group.add(mesh);
+		group.add(mesh); // note: children added on top of list (new child is index 0)
 	});
 }
 scene.add(group);
@@ -62,6 +63,6 @@ button.addEventListener('click', changeOpacity);
 
 function changeOpacity() {
 	alert('button');
-	group.children[0].material.transparent = true;
-	group.children[0].material.opacity = .15;
+	group.children[1].material.transparent = true;
+	group.children[1].material.opacity = .15;
 }
