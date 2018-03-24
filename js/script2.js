@@ -28,15 +28,16 @@ var group = new THREE.Group();
 
 // keep the same loader and img
 var loader = new THREE.TextureLoader();
-var imgURL = 'https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57735/land_ocean_ice_cloud_2048.jpg';
+var imageURLs = ['img/mercury.png', 'https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57735/land_ocean_ice_cloud_2048.jpg']
 
 // build layers
 for (var i = 0; i < earthLayers.length; i++) {
-	loader.load(imgURL, function(texture){
+	loader.load(imageURLs[i], function(texture){
 		layer = new THREE.Group();
-		sphere = new THREE.SphereGeometry(i, 30, 30);
+		sphere = new THREE.SphereGeometry(i+1, 30, 30);
 		material = new THREE.MeshBasicMaterial({map: texture, overdraw: 0.5});
 		mesh = new THREE.Mesh(sphere, material);
+		mesh.material.transparent = true;
 		layer.add(mesh);
 		group.add(mesh);
 	});
@@ -48,7 +49,7 @@ camera.position.z = 5;
 function animate() {
 	requestAnimationFrame(animate);
 
-	group.rotation.x += 0.001;
+	group.rotation.x += 0.0001;
 	group.rotation.y += 0.0025;
 
 	renderer.render(scene, camera);
@@ -60,6 +61,7 @@ var button = document.querySelector('#myButton');
 button.addEventListener('click', changeOpacity);
 
 function changeOpacity() {
-	layer1.children[0].material.transparent = true;
-	layer1.children[0].material.opacity = .15;
+	alert('button');
+	group.children[0].material.transparent = true;
+	group.children[0].material.opacity = .15;
 }
