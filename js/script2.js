@@ -35,10 +35,18 @@ var imageURLs = ['img/mercury.png', 'https://eoimages.gsfc.nasa.gov/images/image
 for (var i = 0; i < earthLayers.length; i++) {
 	loader.load(imageURLs[i], function(texture){
 		layer = new THREE.Group();
-		sphere = new THREE.SphereGeometry(2.5, 30, 30);
+		sphere = new THREE.SphereGeometry(2.5, 50, 50);
 		material = new THREE.MeshBasicMaterial({map: texture, overdraw: 0.5});
 		mesh = new THREE.Mesh(sphere, material);
 		mesh.material.transparent = true;
+		if (i == 0) {
+			mesh.scale.set(1,1,1);
+		}
+		if (i == 1) {
+			mesh.scale.set(1,0.8,0.8);
+		}
+		//XYscale = 1.0 - Number('.' + String(i));
+		//mesh.scale.set(1,XYscale,XYscale);
 		layer.add(mesh);
 		group.add(mesh); // note: children added on top of list (new child is index 0)
 	});
@@ -46,6 +54,14 @@ for (var i = 0; i < earthLayers.length; i++) {
 scene.add(group);
 
 camera.position.z = 5;
+
+const pointLight = new THREE.PointLight(0xFFFFFF);
+
+pointLight.position.x = 10;
+pointLight.position.y = 50;
+pointLight.position.z = 400;
+
+scene.add(pointLight);
 
 function animate() {
 	requestAnimationFrame(animate);
@@ -62,7 +78,6 @@ var button = document.querySelector('#myButton');
 button.addEventListener('click', changeOpacity);
 
 function changeOpacity() {
-	alert('button');
 	group.children[1].material.transparent = true;
 	group.children[1].material.opacity = .15;
 }
