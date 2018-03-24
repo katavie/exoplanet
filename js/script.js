@@ -17,7 +17,7 @@ var sphere, material, mesh;
 var loader = new THREE.TextureLoader();
 loader.load('https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57735/land_ocean_ice_cloud_2048.jpg', function(texture) {
     // create sphere
-    sphere = new THREE.SphereGeometry(2, 32, 32); // radius, segments, rings
+    sphere = new THREE.SphereGeometry(2, 35, 35); // radius, segments, rings
 
     // map texture to material
     material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
@@ -31,7 +31,7 @@ loader.load('https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57735/land
 });
 //globe.position.set(0,2,-1);
 
-var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+var geometry = new THREE.SphereGeometry( 1.5, 25, 25 );
 var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 var cube = new THREE.Mesh( geometry, material );
 cube.transparent = true;
@@ -48,11 +48,10 @@ function animate() {
     requestAnimationFrame( animate );
 
     // rotation animation
-    globe.rotation.x += 0.001;
-    globe.rotation.y += 0.0025;
+    bigGroup.rotation.x += 0.001;
+    bigGroup.rotation.y += 0.0025;
 
-    cube.rotation.x += -0.001;
-    cube.rotation.y += 0.0025;
+
     
     renderer.render( scene, camera );
 }
@@ -81,5 +80,5 @@ var objects = [globe.children[0], cube]
 
 function changeOpacity(){
     globe.children[0].material.transparent = true;
-    globe.children[0].material.opacity = 0.5;
+    globe.children[0].material.opacity = 0.15;
 }
