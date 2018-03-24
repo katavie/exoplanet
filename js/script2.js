@@ -81,3 +81,49 @@ function changeOpacity() {
 	group.children[1].material.transparent = true;
 	group.children[1].material.opacity = .15;
 }
+
+function animationBuilder(direction) {
+  return function animateRotate() {
+    switch (direction) {
+      case 'up':
+        group.rotation.x -= 0.2;
+        break;
+      case 'down':
+        group.rotation.x += 0.2;
+        break;
+      case 'left':
+        group.rotation.y -= 0.2;
+        break;
+      case 'right':
+        group.rotation.y += 0.2;
+        break;
+      default:
+        break;
+    }
+  }
+}
+
+var animateDirection = {
+  up: animationBuilder('up'),
+  down: animationBuilder('down'),
+  left: animationBuilder('left'),
+  right: animationBuilder('right')
+}
+
+function checkKey(e) {
+  e = e || window.event;
+  e.preventDefault();
+ 
+  //based on keycode, trigger appropriate animation:
+  if (e.keyCode == '38') {
+    animateDirection.up();
+  } else if (e.keyCode == '40') {
+    animateDirection.down();
+  } else if (e.keyCode == '37') {
+    animateDirection.left();
+  } else if (e.keyCode == '39') {
+    animateDirection.right();
+  }
+}
+
+document.onkeydown = checkKey;
